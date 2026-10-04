@@ -1,3 +1,4 @@
+from pathlib import Path
 import pandas as pd
 import streamlit as st
 import matplotlib.pyplot as plt
@@ -11,9 +12,10 @@ st.set_page_config(
     layout="wide"
 )
 
-@st.cache_data
-def load_data():
-    df = pd.read_csv("main_data.csv")
+@st.cache_data 
+def load_data(): 
+    file_path = Path(__file__).parent / "main_data.csv"
+    df = pd.read_csv(file_path)
     df["datetime"] = pd.to_datetime(df[["year", "month", "day", "hour"]])
     return df
 
